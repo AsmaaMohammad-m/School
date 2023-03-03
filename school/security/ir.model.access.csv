@@ -1,0 +1,11 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access.school,school_student,model_school_student,,1,1,1,1
+access.item,school_item,model_school_item,,1,1,1,1
+access.subject,school_subject,model_school_subject,,1,1,1,1
+access.partner,res_partner,model_res_partner,,1,1,1,1
+
+
+
+
+
+

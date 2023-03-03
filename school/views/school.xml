@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+            <record id="school_student_view_tree" model="ir.ui.view">
+            <field name="name">school.student.view.tree</field>
+            <field name="model">school.student</field>
+            <field name="arch" type="xml">
+                <tree string="Students"
+                      decoration-danger="admission_date &lt; current_date"
+                      decoration-primary="admission_date &gt; current_date"
+                      decoration-success="admission_date == current_date"
+                      decoration-it="admission_date == current_date"
+                      decoration-bf="admission_date == current_date"
+                >
+
+                                <field name="name"/>
+                                <field name="admission_code"/>
+
+                                <field name="class_id"/>
+                                <field name="division"/>
+                                <field name="address"/>
+
+                                <field name="birth_date"/>
+                                <field name="age"/>
+                                <field name="date"/>
+                                <field name="officer"/>
+                                <field name="admission_date"/>
+
+                                <field name="subjects"/>
+
+                </tree>
+            </field>
+        </record>
+        <record id="school_student_view_form" model="ir.ui.view">
+            <field name="name">school.student.view.form</field>
+            <field name="model">school.student</field>
+            <field name="arch" type="xml">
+                <form string="Student">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="class_id"/>
+                                <field name="division"/>
+                                <field name="address"/>
+                                <field name="admission_code"/>
+
+                            </group>
+                            <group>
+                                <field name="birth_date"/>
+                                <field name="age"/>
+                                <field name="date"/>
+                                <field name="officer"/>
+                                <field name="admission_date"/>
+
+                                <field name="subjects"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="school_student_view_form" model="ir.ui.view">
+            <field name="name">school.subject.view.form</field>
+            <field name="model">school.subject</field>
+            <field name="arch" type="xml">
+                <form string="Subject">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="description"/>
+
+                            </group>
+
+                        </group>
+                    </sheet>
+
+                </form>
+            </field>
+        </record>
+           <record id="school_item_view_form" model="ir.ui.view">
+            <field name="name">school.item.view.form</field>
+            <field name="model">school.item</field>
+            <field name="arch" type="xml">
+                <form string="Item">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="student_id"/>
+                                <field name="class_id"/>
+                                <field name="division"/>
+                                <field name="admission_date"/>
+                                <field name="product_ids" widget="many2many_tags"/>
+
+                            </group>
+
+                        </group>
+                    </sheet>
+
+                </form>
+            </field>
+        </record>
+                <record id="school_student_view_graph" model="ir.ui.view">
+            <field name="name">school.student.view.form</field>
+            <field name="model">school.student</field>
+            <field name="arch" type="xml">
+                <graph string="Student">
+
+
+                                <field name="name" type="row"/>
+                                <field name="class_id" type="measure"/>
+
+
+                </graph>
+            </field>
+        </record>
+               <record id="school_student_view_calendar" model="ir.ui.view">
+            <field name="name">school.student.view.calendar</field>
+            <field name="model">school.student</field>
+            <field name="arch" type="xml">
+                <calendar string="Student" date_start="admission_date" mode="month" color="name" event_open_popup="true">
+
+
+                                <field name="name" type="row"/>
+                                <field name="class_id" type="measure"/>
+
+
+                </calendar>
+            </field>
+        </record>
+             <record id="inherited_res_partner_view_form" model="ir.ui.view">
+            <field name="name">res.partner.view.form</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+             <xpath expr="//field[@name='vat']" position="after">
+                 <field name="date_of_birth"/>
+             </xpath>
+            </field>
+        </record>
+
+        <record id="school_action" model="ir.actions.act_window">
+            <field name="name">School Student</field>
+            <field name="res_model">school.student</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_mode">tree,form,kanban,graph,calendar</field>
+
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    No Students yet!
+                </p>
+            </field>
+        </record>
+            <record id="item_action" model="ir.actions.act_window">
+            <field name="name">School Item</field>
+            <field name="res_model">school.item</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_mode">tree,form</field>
+
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    No items yet!
+                </p>
+            </field>
+        </record>
+        <record id="subject_action" model="ir.actions.act_window">
+            <field name="name">Subject :)</field>
+            <field name="res_model">school.subject</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_mode">tree,form,kanban,graph</field>
+
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    No Subjects yet!
+                </p>
+            </field>
+        </record>
+        <menuitem name="School"
+                  id="menu_school_root"/>
+        <menuitem name="School"
+                  id="menu_school"
+                  parent="menu_school_root"/>
+        <menuitem name="Student"
+                  id="menu_school_student"
+                  parent="menu_school"
+                  action="school_action" sequence="6"/>
+        <menuitem name="Subjects"
+                  id="menu_school_subject"
+                  parent="menu_school"
+                  action="subject_action" sequence="7"/>
+        <menuitem name="Items"
+                  id="menu_school_item"
+                  parent="menu_school"
+                  action="item_action" sequence="8"/>
+
+
+    </data>
+
+
+</odoo>
